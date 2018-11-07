@@ -7,13 +7,19 @@ package model;
 
 import java.awt.Color;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author user only
  */
 public class Tempat {
+
     private int tinggi; // tinggi tempat Game
     private int lebar;  // lebar tempat Game
     private ArrayList<Sel> daftarSel; // daftar sel
@@ -26,22 +32,52 @@ public class Tempat {
     public Tempat() {
         daftarSel = new ArrayList<Sel>();
     }
-    
-    
-    
+
     /**
-     * Fungsi pembaca file konfigurasi.
-     * Hasil pembacaan file akan disimpan di atribut 'isi'.
-     * @param file 
+     * Fungsi pembaca file konfigurasi. Hasil pembacaan file akan disimpan di
+     * atribut 'isi'.
+     *
+     * @param file
      */
-    public void bacaKonfigurasi(File file){
+    public void bacaKonfigurasi(File file) {
+        FileInputStream input = null;
+        String hasil = "";
+        int dataInt;
         
+        boolean isi = false;
+        
+        int x = 0, y = 0;
+        
+        try {
+            input = new FileInputStream(file);
+            while ((dataInt = input.read()) != -1) {
+            hasil=hasil+(char) dataInt;
+            if(dataInt!='\n'){
+           Sel sel =new Sel(x,y,(char) dataInt);
+           sel.setLebar(20);
+           sel.setTinggi(20);
+            this.tambahSel(sel);
+            y++;}
+            else{
+                y=0;
+            x++;
+            }
+                this.setIsi(hasil);
+                
+            }
+        } catch (FileNotFoundException ex) {
+//            Logger.getLogger(Peta.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+//            Logger.getLogger(Peta.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
+
     /**
      * Fungsi penambah daftar sel.
-     * @param sel 
+     *
+     * @param sel
      */
-    public void tambahSel(Sel sel){
+    public void tambahSel(Sel sel) {
         daftarSel.add(sel);
     }
 
