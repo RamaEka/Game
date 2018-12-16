@@ -6,179 +6,77 @@
 package model;
 
 import java.awt.Color;
+import java.awt.Image;
 
 /**
  *
  * @author user only
  */
 public class Sel {
-    private int posisiX; // nomor baris, dimulai dari nol (0)
-    private int posisiY; // nomor kolom, dimulai dari nol (0)
-    private int lebar;
-    private int tinggi;
+    private int baris;
+    private int kolom;
+    private Image image;
+    private int space = 40;
 
-    private char nilai;
-
-    private Color warna;
-
-    public Sel() {
+    public Sel(int x, int y) {
+        this.baris = x;
+        this.kolom = y;
     }
 
-    public Sel(int posisiX, int posisiY, char nilai) {
-        this.posisiX = posisiX;
-        this.posisiY = posisiY;
-        this.nilai = nilai;
+    public int getBaris() {
+        return baris;
     }
 
-    public Sel(int posisiX, int posisiY, char nilai, Color warna) {
-        this.posisiX = posisiX;
-        this.posisiY = posisiY;
-        this.nilai = nilai;
-        this.warna = warna;
+    public void setBaris(int x) {
+        this.baris = x;
     }
 
-    public Sel(int posisiX, int posisiY, int lebar, int tinggi, char nilai, Color warna) {
-        this.posisiX = posisiX;
-        this.posisiY = posisiY;
-        this.lebar = lebar;
-        this.tinggi = tinggi;
-        this.nilai = nilai;
-        this.warna = warna;
+    public int getKolom() {
+        return kolom;
     }
 
-    
-    /**
-     * Fungsi mengecek sel ada di batas kiri
-     *
-     * @return
-     */
-    public boolean isBatasKiri() {
-        if (posisiX <= 0) {
+    public void setKolom(int y) {
+        this.kolom = y;
+    }
+
+    public Image getImage() {
+        return image;
+    }
+
+    public void setImage(Image image) {
+        this.image = image;
+    }
+
+    public boolean PosisiKiri(Sel Ob) {
+        if (((this.getBaris() - space) == Ob.getBaris()) && (this.getKolom() == Ob.getKolom())) {
             return true;
         } else {
             return false;
         }
-
     }
 
-    /**
-     * Fungsi ceking sel ada di batas kanan
-     *
-     * @return
-     */
-    public boolean isBatasKanan() {
-        if (posisiX + lebar < Tempat.batasKanan) {
-            return false;
-        } else {
+    public boolean PosisiKanan(Sel Ob) {
+        if (((this.getBaris() + space) == Ob.getBaris()) && (this.getKolom() == Ob.getKolom())) {
             return true;
+        } else {
+            return false;
         }
     }
 
-    /**
-     * Fungsi untuk menggeser sel ke kanan
-     */
-    public void geserKanan() {
-        if (isBatasKanan() == false) {
-            posisiX = posisiX + lebar;
+    public boolean PosisiAtas(Sel Ob) {
+        if (((this.getKolom() - space) == Ob.getKolom()) && (this.getBaris() == Ob.getBaris())) {
+            return true;
+        } else {
+            return false;
         }
     }
 
-    /**
-     * Fungsi untuk mengecek sel ada di batas atas
-     */
-    public boolean isBatasAtas() {
-        return false;
-    }
-
-    /**
-     * Fungsi untuk mengecek sel ada di batas bawah
-     */
-    public boolean isBatasBawah() {
-        return false;
-    }
-
-    /**
-     * @return the posisiX
-     */
-    public int getPosisiX() {
-        return posisiX;
-    }
-
-    /**
-     * @param posisiX the posisiX to set
-     */
-    public void setPosisiX(int posisiX) {
-        this.posisiX = posisiX;
-    }
-
-    /**
-     * @return the posisiY
-     */
-    public int getPosisiY() {
-        return posisiY;
-    }
-
-    /**
-     * @param posisiY the posisiY to set
-     */
-    public void setPosisiY(int posisiY) {
-        this.posisiY = posisiY;
-    }
-
-    /**
-     * @return the nilai
-     */
-    public char getNilai() {
-        return nilai;
-    }
-
-    /**
-     * @param nilai the nilai to set
-     */
-    public void setNilai(char nilai) {
-        this.nilai = nilai;
-    }
-
-    /**
-     * @return the warna
-     */
-    public Color getWarna() {
-        return warna;
-    }
-
-    /**
-     * @param warna the warna to set
-     */
-    public void setWarna(Color warna) {
-        this.warna = warna;
-    }
-
-    /**
-     * @return the lebar
-     */
-    public int getLebar() {
-        return lebar;
-    }
-
-    /**
-     * @param lebar the lebar to set
-     */
-    public void setLebar(int lebar) {
-        this.lebar = lebar;
-    }
-
-    /**
-     * @return the tinggi
-     */
-    public int getTinggi() {
-        return tinggi;
-    }
-
-    /**
-     * @param tinggi the tinggi to set
-     */
-    public void setTinggi(int tinggi) {
-        this.tinggi = tinggi;
+    public boolean PosisiBawah(Sel Ob) {
+        if (((this.getKolom() + space) == Ob.getKolom()) && (this.getBaris() == Ob.getBaris())) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }
